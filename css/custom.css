@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #e96443;
+    background: -webkit-linear-gradient(to right, #904e95, #e96443);
+    background: linear-gradient(to right, #904e95, #e96443);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.btn {
+    color: #fff;
+    background-color: #00838F !important;
+    font-size: 16px;
+    width: 100%;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: 400;
+    border: 0;
+}
+
+header {
+    background-color: #26C6DA;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.error {
+    background-color: #FBE9E7;
+    border: 1px solid #F4511E;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #F4511E;
+}
+
+.error p {
+    margin: 0;
+}
+
+#content {
+    width: 100%;
+    max-width: 730px;
+    margin: 60px auto;
+    background-color: white;
+    -webkit-box-shadow: 0px 21px 46px -15px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 21px 46px -15px rgba(0, 0, 0, 1);
+    box-shadow: 0px 21px 46px -15px rgba(0, 0, 0, 1);
+}
+
+.content-form {
+    padding: 40px 60px;
+}
+
+#loading img {
+    display: none;
+    margin: 0 auto;
+}
+
+#result {
+    margin-bottom: 40px;
+}
+
+#result div {
+    border: 1px solid #26C6DA;
+    text-align: center;
+    padding: 0 0 20px 0;
+}
+
+#result div p {
+    margin-bottom: 0;
+}
+
+#result div p.header {
+    background-color: #26C6DA;
+    margin-bottom: 10px;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    padding-bottom: 10px;
+}
+
+select {
+    appearance: none;
+    font-size: 16px;
+    width: 80%;
+}
+
+select:focus-visible {
+    outline: none;
+}
+
+#make, #year {
+    border: 0;
+}
+
+.form-group {
+    border: 0;
+}
+
+.form-group--make, .form-group--year {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 0.5px solid #b0b0b0;
+}
+
+.form-group__label {
+    color: #b0b0b0;
+    font-size: 13px;
+}
