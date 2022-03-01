@@ -28,14 +28,74 @@ function eventListeners() {
         if (make === '' || year === '' || level === '') {
             html.displayError('All the fields are mandatory');
         } else {
-            console.log('ok');
+
+            // Create new obj from Insurance, then use it's method calculate
+            const insuranceCar = new Insurance(make, year, level);
+            const price = insuranceCar.calculateQuotation(insuranceCar);
         }
     });
 }
 
 
 
+// ---     Objects     ---
 
+// RELATED TO QUOTATION
+function Insurance(make, year, level) {
+    this.make = make;
+    this.year = year;
+    this.level = level;
+}
+
+
+// Calculate the price
+Insurance.prototype.calculateQuotation = function (insurance) {
+    let price;
+    const base = 2000;
+    const make = insurance.make;
+    const year = insurance.year;
+
+    if (make == 1) {
+        price = base * 1.15;
+    } else if (make == 2) {
+        price = base * 1.05;
+    } else if (make == 3) {
+        price = base * 1.35;
+    }
+
+
+    // Insurance is going to be 3% cheaper for each year
+    const difference = this.getYearDifference(year);
+    price = price - (price * (difference * 3)) /100;
+
+    // Check the level of protection
+    const level = insurance.level;
+    price = this.calculateLevel(price, level);
+    return price;
+}
+
+
+
+// Returns the difference between years
+Insurance.prototype.getYearDifference = function (year) {
+    return new Date().getFullYear() - year;
+}
+
+// Increase the value by 30% - basic level, 50% - complete
+Insurance.prototype.calculateLevel = function(price, level) {
+    if(level === 'basic') {
+        price = price * 1.30;
+    } else {
+        price = price * 1.50;
+    }
+    return price;
+};
+
+
+
+
+
+// RELATED TO THE HTML
 // Display yhe latest 20 years in the select
 function HTMLUI() { };
 
@@ -56,7 +116,7 @@ HTMLUI.prototype.displayYears = function () {
 
 
 // Prints the error
-HTMLUI.prototype.displayError = function(message) {
+HTMLUI.prototype.displayError = function (message) {
     const div = document.createElement('div');
     div.classList.add('error');
     div.innerHTML = `
@@ -65,7 +125,7 @@ HTMLUI.prototype.displayError = function(message) {
     form.insertBefore(div, document.querySelector('.form-group'));
 
     // Remove the error
-    setTimeout(function() {
+    setTimeout(function () {
         document.querySelector('.error').remove();
     }, 3000)
 }
