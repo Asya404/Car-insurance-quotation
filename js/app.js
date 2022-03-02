@@ -106,7 +106,7 @@ Insurance.prototype.calculateLevel = function (price, level) {
 
 
 // RELATED TO THE HTML
-// Display yhe latest 20 years in the select
+// Display the latest 20 years in the select
 function HTMLUI() { };
 
 HTMLUI.prototype.displayYears = function () {
@@ -164,5 +164,11 @@ HTMLUI.prototype.showResults = function (price, insurance) {
     <p class="total">Total:$ ${price}</p>
     `;
 
-    result.appendChild(div);
+    const spinner = document.querySelector('#loading img');
+    spinner.style.display = 'block';
+
+    setTimeout(function() {
+        spinner.style.display = 'none';
+        result.appendChild(div);
+    }, 2000)
 }
