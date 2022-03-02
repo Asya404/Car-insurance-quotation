@@ -28,10 +28,18 @@ function eventListeners() {
         if (make === '' || year === '' || level === '') {
             html.displayError('All the fields are mandatory');
         } else {
+            // Clear the previous result
+            const prevResult = document.querySelector('.result div');
+            if(prevResult != null) {
+                prevResult.remove();
+            }
 
             // Create new obj from Insurance, then use it's method calculate
             const insuranceCar = new Insurance(make, year, level);
             const price = insuranceCar.calculateQuotation(insuranceCar);
+
+            // Print the result from HTMLUI
+            html.showResults(price, insuranceCar);
         }
     });
 }
@@ -46,6 +54,7 @@ function Insurance(make, year, level) {
     this.year = year;
     this.level = level;
 }
+
 
 
 // Calculate the price
@@ -63,10 +72,9 @@ Insurance.prototype.calculateQuotation = function (insurance) {
         price = base * 1.35;
     }
 
-
     // Insurance is going to be 3% cheaper for each year
     const difference = this.getYearDifference(year);
-    price = price - (price * (difference * 3)) /100;
+    price = price - (price * (difference * 3)) / 100;
 
     // Check the level of protection
     const level = insurance.level;
@@ -81,9 +89,11 @@ Insurance.prototype.getYearDifference = function (year) {
     return new Date().getFullYear() - year;
 }
 
+
+
 // Increase the value by 30% - basic level, 50% - complete
-Insurance.prototype.calculateLevel = function(price, level) {
-    if(level === 'basic') {
+Insurance.prototype.calculateLevel = function (price, level) {
+    if (level === 'basic') {
         price = price * 1.30;
     } else {
         price = price * 1.50;
@@ -128,4 +138,31 @@ HTMLUI.prototype.displayError = function (message) {
     setTimeout(function () {
         document.querySelector('.error').remove();
     }, 3000)
+}
+
+
+
+// Prints the result into html
+HTMLUI.prototype.showResults = function (price, insurance) {
+    const result = document.querySelector('.result');
+    const div = document.createElement('div');
+    let make = insurance.make;
+
+    if (make == '1') {
+        make = 'American';
+    } else if (make == '2') {
+        make = 'Asian';
+    } else if (make == '3') {
+        make = 'European';
+    }
+
+    div.innerHTML = `
+    <p class="header">Summary</p>
+    <p>Make: ${make}</p>
+    <p>Year: ${insurance.year}</p>
+    <p>Level: ${insurance.level}</p>
+    <p class="total">Total:$ ${price}</p>
+    `;
+
+    result.appendChild(div);
 }
